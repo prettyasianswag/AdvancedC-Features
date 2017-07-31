@@ -23,11 +23,11 @@ namespace Generics
 
             // Add Range
             CarBrands<GameObject> carList1 = new CarBrands<GameObject>();
-            carList1.Add(car1);
+            //carList1.Add(car1);
 
             CarBrands<GameObject> carList2 = new CarBrands<GameObject>();
 
-            CarBrands.RemoveAt(car1);
+            //CarBrands.RemoveAt(car1);
         }
 
         // Update is called once per frame
