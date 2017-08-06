@@ -6,42 +6,53 @@ namespace Delegates
 {
     public class EnemySpawner : MonoBehaviour
     {
-        public Transform target;
-        public Transform[] spawnPoint;
-        public GameObject[] enemyPrefab;
-
+        public enum Spawn
+        {
+            ORC = 0,
+            TROLL = 1
+        }
         delegate void SpawnFunc();
 
+        public Transform target;
+        public GameObject orcPrefab;
+        public GameObject trollPrefab;
+        public float minAmount = 0, maxAmount = 20;
+        public float spawnRate = 1f;
+
+        private List<SpawnFunc> spawnFuncs = new List<SpawnFunc>();
+        public Spawn spawnIndex = Spawn.TROLL;
+
+        // Use this for initialization
+        void Awake()
+        {
+            spawnFuncs.Add(SpawnTroll);
+            spawnFuncs.Add(SpawnOrc);
+        }
+
         // Update is called once per frame
-        void Update()
+        protected virtual void Update()
         {
-            StartCoroutine(SpawnEnemy());
+            spawnFuncs[(int)spawnIndex]();
         }
 
-        public delegate void OnSpawn();
-        public event OnSpawn onSpawn;
-
-        private void Start()
+        /// <summary>
+        /// goal is to call those two functions
+        /// randomly using delegates
+        /// </summary>
+        void SpawnTroll()
         {
-
+            //Spawn Troll Prefab
+            Instantiate(trollPrefab, transform.position, transform.rotation);
+            //SetTarget on troll to target
+            target = GameObject.FindGameObjectWithTag("Player").transform;
         }
 
-        IEnumerator SpawnEnemy()
+        void SpawnOrc()
         {
-            // Choosing a random spawnpoint to spawn a random enemyPrefab
-            int spawn_num = Random.Range(0, spawnPoint.Length);
-
-            // For every spawnpoint, spawn an enemy prefab randomly
-            for (int i = 0; i < spawnPoint.Length; i++)
-            {
-                // Choosing the enemy prefab to spawn
-                int prefab_num = Random.Range(0, enemyPrefab.Length);
-                // Spawning the chosen prefab
-                Instantiate(enemyPrefab[prefab_num], spawnPoint[i].position, Quaternion.identity);
-                // After 10 seconds, run the line of code again
-                yield return new WaitForSeconds(1f);
-            }
-
+            //Spawn Orc Prefab
+            Instantiate(orcPrefab, transform.position, transform.rotation);
+            //SetTarget on Orc to target
+            target = GameObject.FindGameObjectWithTag("Player").transform;
         }
     }
 }
