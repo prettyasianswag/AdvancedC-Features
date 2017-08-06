@@ -10,6 +10,8 @@ namespace Delegates
         public Transform[] spawnPoint;
         public GameObject[] enemyPrefab;
 
+        delegate void SpawnFunc();
+
         // Update is called once per frame
         void Update()
         {
