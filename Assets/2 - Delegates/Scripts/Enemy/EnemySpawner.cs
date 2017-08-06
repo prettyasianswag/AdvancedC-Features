@@ -6,21 +6,15 @@ namespace Delegates
 {
     public class EnemySpawner : MonoBehaviour
     {
-        public enum Spawn
-        {
-            ORC = 0,
-            TROLL = 1
-        }
         delegate void SpawnFunc();
 
         public Transform target;
+        public Transform spawnPoint;
         public GameObject orcPrefab;
         public GameObject trollPrefab;
         public float minAmount = 0, maxAmount = 20;
         public float spawnRate = 1f;
-
         private List<SpawnFunc> spawnFuncs = new List<SpawnFunc>();
-        public Spawn spawnIndex = Spawn.TROLL;
 
         // Use this for initialization
         void Awake()
@@ -32,7 +26,8 @@ namespace Delegates
         // Update is called once per frame
         protected virtual void Update()
         {
-            spawnFuncs[(int)spawnIndex]();
+            int randomIndex = Random.Range(0, spawnFuncs.Count);
+            spawnFuncs[randomIndex]();
         }
 
         /// <summary>
@@ -42,17 +37,19 @@ namespace Delegates
         void SpawnTroll()
         {
             //Spawn Troll Prefab
-            Instantiate(trollPrefab, transform.position, transform.rotation);
+            GameObject clone = Instantiate(trollPrefab, spawnPoint.position, transform.rotation);
             //SetTarget on troll to target
-            target = GameObject.FindGameObjectWithTag("Player").transform;
+            Enemy enemy = clone.GetComponent<Enemy>();
+            enemy.target = target;
         }
 
         void SpawnOrc()
         {
             //Spawn Orc Prefab
-            Instantiate(orcPrefab, transform.position, transform.rotation);
+            GameObject clone = Instantiate(orcPrefab, spawnPoint.position, transform.rotation);
             //SetTarget on Orc to target
-            target = GameObject.FindGameObjectWithTag("Player").transform;
+            Enemy enemy = clone.GetComponent<Enemy>();
+            enemy.target = target;
         }
     }
 }
