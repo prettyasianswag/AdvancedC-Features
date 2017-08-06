@@ -13,6 +13,11 @@ namespace Delegates
 
         private bool isAttacking = false;
 
+        private void Start()
+        {
+            target = GameObject.FindGameObjectWithTag("Player").transform;
+        }
+
         // Update is called once per frame
         protected override void Update()
         {

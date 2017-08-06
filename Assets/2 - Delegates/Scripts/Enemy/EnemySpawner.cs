@@ -7,37 +7,39 @@ namespace Delegates
     public class EnemySpawner : MonoBehaviour
     {
         public Transform target;
-        public GameObject orcPrefab;
-        public GameObject trollPrefab;
-        public float minAmount = 0, maxAmount = 20;
-        public float spawnRate = 1f;
-
-        // Use this for initialization
-        void Start()
-        {
-
-        }
+        public Transform[] spawnPoint;
+        public GameObject[] enemyPrefab;
 
         // Update is called once per frame
         void Update()
         {
+            StartCoroutine(SpawnEnemy());
+        }
+
+        public delegate void OnSpawn();
+        public event OnSpawn onSpawn;
+
+        private void Start()
+        {
 
         }
 
-        /// <summary>
-        /// Goal is to call these two functions randomly using delegates
-        /// </summary>
-
-        void SpawnTroll()
+        IEnumerator SpawnEnemy()
         {
-            // Spawn Troll Prefab
-            // SetTarget on Troll to target
-        }
+            // Choosing a random spawnpoint to spawn a random enemyPrefab
+            int spawn_num = Random.Range(0, spawnPoint.Length);
 
-        void SpawnOrc()
-        {
-            // Spawn Orc Prefab
-            // SetTarget on Orc to target
+            // For every spawnpoint, spawn an enemy prefab randomly
+            for (int i = 0; i < spawnPoint.Length; i++)
+            {
+                // Choosing the enemy prefab to spawn
+                int prefab_num = Random.Range(0, enemyPrefab.Length);
+                // Spawning the chosen prefab
+                Instantiate(enemyPrefab[prefab_num], spawnPoint[i].position, Quaternion.identity);
+                // After 10 seconds, run the line of code again
+                yield return new WaitForSeconds(1f);
+            }
+
         }
     }
 }
