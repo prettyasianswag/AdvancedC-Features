@@ -40,7 +40,7 @@ namespace Delegates
             GameObject clone = Instantiate(trollPrefab, spawnPoint.position, transform.rotation);
             //SetTarget on troll to target
             Enemy enemy = clone.GetComponent<Enemy>();
-            enemy.target = target;
+            enemy.SetTarget(target);
         }
 
         void SpawnOrc()

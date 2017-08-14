@@ -67,7 +67,14 @@ namespace Delegates
 
         public void SetTarget(Transform target)
         {
-            this.target = target;
+            if (target.tag != "Player")
+            {
+                this.target = null;
+            }
+            else
+            {
+                this.target = target;
+            }
         }
 
         // Update is called once per frame
