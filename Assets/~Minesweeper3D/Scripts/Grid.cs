@@ -88,5 +88,56 @@ namespace Minesweeper3D
                 }
             }
         }
+
+        public void GetAdjacentMineCountAt(Block b)
+        {
+            // Loop through all elements and have each axis go between -1 to 1
+            for (int x = -1; x <= 1; x++)
+            {
+                for (int y = -1; y <= 1; y++)
+                {
+                    for (int z = -1; z <= -1; z++)
+                    {
+                        // Calculate adjacent element's index
+                        int desiredX = b.x + x;
+
+                        int desiredY = b.y + y;
+
+                        int desiredZ = b.z + z;
+
+                        // IF desiredX is within range of blocks array
+                        if (desiredX == b.x)
+                        {
+                            // IF the element at index is a mine
+                            if (b.isMine)
+                            {
+                                // Increment count by 1
+                                desiredX++;
+                            }
+                        }
+
+                        if (desiredY == b.y)
+                        {
+                            // IF the element at index is a mine
+                            if (b.isMine)
+                            {
+                                // Increment count by 1
+                                desiredY++;
+                            }
+                        }
+                        
+                        if (desiredZ == b.z)
+                        {
+                            // IF the element at index is a mine
+                            if (b.isMine)
+                            {
+                                // Increment count by 1
+                                desiredZ++;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

@@ -75,6 +75,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\!Global\Scripts\CameraOrbitWithZoom.cs" />
     <Compile Include="Assets\!Global\Scripts\RotateToVelocity2D.cs" />
     <Compile Include="Assets\1 - Generics\Scripts\CustomList.cs" />
     <Compile Include="Assets\1 - Generics\Scripts\GenericsTest.cs" />
@@ -94,6 +95,8 @@
     <Compile Include="Assets\3 - Abstract Classes\Scripts\Weapons\PulseCannon.cs" />
     <Compile Include="Assets\3 - Abstract Classes\Scripts\Weapons\Shotgun.cs" />
     <Compile Include="Assets\3 - Abstract Classes\Scripts\Weapons\Weapon.cs" />
+    <Compile Include="Assets\~Minesweeper3D\Scripts\Block.cs" />
+    <Compile Include="Assets\~Minesweeper3D\Scripts\Grid.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

@@ -53,7 +53,11 @@ namespace Minesweeper3D
 
         void Update()
         {
-
+            // If player left clicks, deactivates the block
+            if (Input.GetMouseButtonDown(0))
+            {
+                DeactvateBlock();
+            }
         }
 
         // Determining which index of colours to use for which number we have
@@ -97,7 +101,21 @@ namespace Minesweeper3D
             gameObject.SetActive(false);
         }
 
+        // Deactivate Block
+        void DeactvateBlock()
+        {
+            // Getting mouse position
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
+            // Hit for raycast
+            RaycastHit hit;
+
+            // If the raycast hits, set the gameobject to false
+            if (Physics.Raycast(ray, out hit))
+            {
+                gameObject.SetActive(false);
+            }
+        }
     }
 }
 
