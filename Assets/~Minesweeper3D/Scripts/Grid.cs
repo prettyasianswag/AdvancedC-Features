@@ -28,16 +28,20 @@ namespace Minesweeper3D
         void Update()
         {
             // IF left mouse button is up
-            if (Input.GetMouseButtonUp(0))
+            if (Input.GetMouseButtonDown(0))
             {
                 // IF raycast out from camera hits something
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit))
                 {
-                    // Get hit object's block component
-                    // CALL SelectBlock() and pass in the hit block
-                    SelectBlock(hit);
+                    // Get hit object's Block component
+                    Block b = hit.collider.GetComponent<Block>();
+                    if (b != null)
+                    {
+                        // CALL SelectBlock() and pass in the hit block
+                        SelectBlock(b);
+                    }
                 }
             }
         }
@@ -119,13 +123,16 @@ namespace Minesweeper3D
                         int desiredZ = b.z + z;
 
                        // Coordinates in range?
-                       if (desiredX >= 0 && desiredY >= 0 && desiredZ >= 0 && desiredX < width && desiredY < height && desiredZ < depth)
+                       if (desiredX >= 0 && desiredY >= 0 && desiredZ >= 0 && 
+                           desiredX < width && desiredY < height && desiredZ < depth)
                         {
                             // Then check for mine
                             Block currentBlock = blocks[desiredX, desiredY, desiredZ];
                             if (currentBlock.isMine)
                             {
                                 count++;
+                                // count = count + 1
+                                // count += 1
                             }
                         }
                     }
@@ -177,19 +184,20 @@ namespace Minesweeper3D
         public void UncoverMines()
         {
             // Loop through all elements in array
-            for (int width = 0; width < 10; width++)
+            for (int x = 0; x < width; x++)
             {
-                for (int height = 0; height < 10; height++)
+                for (int y = 0; y < height; y++)
                 {
-                    for (int depth = 0; depth < 10; depth++)
+                    for (int z = 0; z < depth; z++)
                     {
                         // Get currentBlock at index
-                        Block currentBlock = blocks[width, height, depth];
+                        Block currentBlock = blocks[x, y, z];
                         // IF currentBlock is a mine
                         if (currentBlock.isMine)
                         {
                             // Reveal the mine
-                            block.Reveal();
+                            int adjacentMines = GetAdjacentMineCountAt(currentBlock);
+                            currentBlock.Reveal(adjacentMines);
                         }
                     }
                 }
@@ -200,18 +208,21 @@ namespace Minesweeper3D
         public void SelectBlock(Block selectedBlock)
         {
             // Reveal the selected block
-            selectedBlock.Reveal();
-
+            int adjacentMines = GetAdjacentMineCountAt(selectedBlock);
+            selectedBlock.Reveal(adjacentMines);
             // IF the select block is a mine
             if (selectedBlock.isMine)
             {
                 // Uncover all other mines
                 UncoverMines();
+                // Print gameover
+                print("GameOver");
             }
             // ELSE IF there are no adjacent mines
-            else if ()
+            else if (!selectedBlock.isMine)
             {
-                
+                // Perform Flood Fill algorithm to reveal all empty blocks
+                FFuncover(selectedBlock.x, selectedBlock.y, selectedBlock.z, new bool[width, height, depth]);
             }
         }
     }

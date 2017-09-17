@@ -47,7 +47,7 @@ namespace Minesweeper3D
             textElement.transform.SetParent(null);
 
             // Randomly decide if it's a mine or not
-            isMine = Random.value < 0.5f;
+            isMine = Random.value < 0.05f;
         }
 
 
