@@ -31,7 +31,7 @@ public class CameraOrbitWithZoom : MonoBehaviour
         if (Input.GetMouseButton(1))
         {
             // Hide the cursor
-            Cursor.visible = false;
+            HideCursor(true);
             // Get Input()
             GetInput();
         }
@@ -39,7 +39,7 @@ public class CameraOrbitWithZoom : MonoBehaviour
         else
         {
             // Unhide cursor
-            Cursor.visible = true;
+            HideCursor(false);
         }
 
         Movement();

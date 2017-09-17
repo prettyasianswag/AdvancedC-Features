@@ -219,7 +219,7 @@ namespace Minesweeper3D
                 print("GameOver");
             }
             // ELSE IF there are no adjacent mines
-            else if (!selectedBlock.isMine)
+            else if (adjacentMines == 0)
             {
                 // Perform Flood Fill algorithm to reveal all empty blocks
                 FFuncover(selectedBlock.x, selectedBlock.y, selectedBlock.z, new bool[width, height, depth]);
