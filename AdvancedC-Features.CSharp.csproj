@@ -12,12 +12,15 @@
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.5.0f3</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -76,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\!Global\Scripts\CameraOrbitWithZoom.cs" />
+    <Compile Include="Assets\!Global\Scripts\DisownOnStart.cs" />
     <Compile Include="Assets\!Global\Scripts\RotateToVelocity2D.cs" />
     <Compile Include="Assets\1 - Generics\Scripts\CustomList.cs" />
     <Compile Include="Assets\1 - Generics\Scripts\GenericsTest.cs" />
@@ -95,6 +99,8 @@
     <Compile Include="Assets\3 - Abstract Classes\Scripts\Weapons\PulseCannon.cs" />
     <Compile Include="Assets\3 - Abstract Classes\Scripts\Weapons\Shotgun.cs" />
     <Compile Include="Assets\3 - Abstract Classes\Scripts\Weapons\Weapon.cs" />
+    <Compile Include="Assets\~GolfWithManny\Scripts\Controller.cs" />
+    <Compile Include="Assets\~GolfWithManny\Scripts\Player.cs" />
     <Compile Include="Assets\~Minesweeper3D\Scripts\Block.cs" />
     <Compile Include="Assets\~Minesweeper3D\Scripts\Grid.cs" />
   </ItemGroup>
